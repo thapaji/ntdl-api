@@ -44,7 +44,7 @@ router.patch("/", (req, res) => {
 router.delete("/", (req, res) => {
     const { id } = req.body;
     console.log(id);
-    fakeDb = fakeDb.filter(item=>item.id != id);
+    fakeDb = fakeDb.filter((item)=>item.id !== id);
   
     res.json({
       message: "Your task has been deleted",
