@@ -15,16 +15,19 @@ router.get("/", (req, res) => {
 });
 
 /* POST*/
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const result = insertTask(req.body);
-    console.log(result);
-    res.json({
-      message: "From the router",
-    });
-
+    const result = await insertTask(req.body);
+    // console.log(result);
+    result?._id
+      ? res.json({
+          message: "Added the data",
+        })
+      : res.json({
+          message: "Failed to add new data",
+        });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   /*
     const id = idGenerator();
@@ -39,16 +42,15 @@ router.patch("/", (req, res) => {
   console.log(id, type);
   fakeDb = fakeDb.map((item) => {
     if (item.id === id) {
-      return { ...item, type }
+      return { ...item, type };
     }
     return item;
-  })
+  });
 
   res.json({
     message: "Your task has been updated",
   });
 });
-
 
 /*delete task*/
 router.delete("/", (req, res) => {
