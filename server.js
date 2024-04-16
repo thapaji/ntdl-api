@@ -1,9 +1,14 @@
 import express from "express";
 import morgan from "morgan";
 import taskRouter from "./src/routers/taskRouter.js";
+import { conectMongo } from "./src/config/mongoDBConfig.js";
+
 const app = express();
 
 const PORT = process.env.PORT || 8000;
+
+
+conectMongo();
 
 /*    MiddleWares       */
 app.use(morgan("dev"));
