@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 router.patch("/", async (req, res) => {
   const { id, type } = req.body;
   const result = await updateTask(id, type);
-  console.log(result);
+  // console.log(result);
 
   // fakeDb = fakeDb.map((item) => {
   //   if (item.id === id) {
@@ -50,21 +50,30 @@ router.patch("/", async (req, res) => {
   //   }
   //   return item;
   // });
-
-  res.json({
-    message: "Your task has been updated",
-  });
+  result?.acknowledged
+    ? res.json({
+        message: "Your task has been updated",
+      })
+    : res.json({
+        message: "Your task could not be updated",
+      });
 });
 
 /*delete task*/
-router.delete("/", (req, res) => {
+router.delete("/", async (req, res) => {
   const { id } = req.body;
-  console.log(id);
-  fakeDb = fakeDb.filter((item) => item.id !== id);
+  const result = await deleteTask(id);
 
-  res.json({
-    message: "Your task has been deleted",
-  });
+  // console.log(id);
+  // fakeDb = fakeDb.filter((item) => item.id !== id);
+
+  result?.acknowledged
+    ? res.json({
+        message: "Your task has been deleted",
+      })
+    : res.json({
+        message: "Your task could not be deleted",
+      });
 });
 
 export default router;
