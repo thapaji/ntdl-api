@@ -1,16 +1,18 @@
 import express from "express";
 import { idGenerator } from "../utils.js";
-import { insertTask } from "../models/task/TaskModel.js";
+import { insertTask, getTasks, updateTask, deleteTask } from "../models/task/TaskModel.js";
 
 const router = express.Router();
 
 let fakeDb = [];
 
 /* GET*/
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  const result = await getTasks();
+  console.log(result);
   res.json({
-    message: "From the router",
-    data: fakeDb,
+    message: "Tasks read",
+    data: result,
   });
 });
 
