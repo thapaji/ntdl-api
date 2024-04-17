@@ -22,7 +22,7 @@ Content-Type: application/json
  #body of the request,there should be gap between header and body
 {
     "type" : "bad",
-    "id":"cfm44t"
+    "id":"661f353af9e1c0c82c1d9fec"
 }
 
 #### DELETE data in server

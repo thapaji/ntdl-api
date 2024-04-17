@@ -39,15 +39,17 @@ router.post("/", async (req, res) => {
 });
 
 /*update task*/
-router.patch("/", (req, res) => {
+router.patch("/", async (req, res) => {
   const { id, type } = req.body;
-  console.log(id, type);
-  fakeDb = fakeDb.map((item) => {
-    if (item.id === id) {
-      return { ...item, type };
-    }
-    return item;
-  });
+  const result = await updateTask(id, type);
+  console.log(result);
+
+  // fakeDb = fakeDb.map((item) => {
+  //   if (item.id === id) {
+  //     return { ...item, type };
+  //   }
+  //   return item;
+  // });
 
   res.json({
     message: "Your task has been updated",
