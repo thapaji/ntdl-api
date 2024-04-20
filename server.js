@@ -2,11 +2,13 @@ import express from "express";
 import morgan from "morgan";
 import taskRouter from "./src/routers/taskRouter.js";
 import { conectMongo } from "./src/config/mongoDBConfig.js";
+import cors from 'cors';
 
 const app = express();
 
 const PORT = process.env.PORT || 8000;
 
+app.use(cors())
 
 conectMongo();
 
