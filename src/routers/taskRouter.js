@@ -21,13 +21,18 @@ router.post("/", async (req, res) => {
     // console.log(result);
     result?._id
       ? res.json({
-          message: "Added the data",
-        })
+        status: "success",
+        message: "Added the task",
+      })
       : res.json({
-          message: "Failed to add new data",
-        });
+        status: "error",
+        message: "Failed to add new task",
+      });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "Something went wrong in server. Please contact the provider.",
+    });
   }
 });
 
@@ -37,19 +42,22 @@ router.patch("/", async (req, res) => {
     const result = await updateTask(req.body);
     result?._id
       ? res.json({
-          message: "Your task has been updated",
-        })
+        status: "success",
+        message: "Your task has been updated",
+      })
       : res.json({
-          message: "Your task could not be updated",
-        });
+        status: "error",
+        message: "Your task could not be updated",
+      });
   } catch (error) {
     res.status(500).json({
+      status: "error",
       message: "Something went wrong in server. Please contact the provider.",
     });
   }
 });
 
-/*delete task*/
+/*delete task
 router.delete("/", async (req, res) => {
   try {
     console.log(req.body);
@@ -58,13 +66,41 @@ router.delete("/", async (req, res) => {
 
     result?._id
       ? res.json({
-          message: "Your task has been deleted",
-        })
+        status: "success",
+        message: "Your task has been deleted",
+      })
       : res.json({
-          message: "Your task could not be deleted",
-        });
+        status: "error",
+        message: "Your task could not be deleted",
+      });
   } catch (error) {
     res.status(500).json({
+      status: "error",
+      message: "Something went wrong in server. Please contact the provider.",
+    });
+  }
+});
+*/
+
+/*delete task*/
+router.delete("/", async (req, res) => {
+  try {
+    console.log(':::::::::::::::::' + req.body);
+    const { ids } = req.body;
+    const result = await deleteTask(ids);
+
+    result?._id
+      ? res.json({
+        status: "success",
+        message: "Your task has been deleted",
+      })
+      : res.json({
+        status: "error",
+        message: "Your task could not be deleted",
+      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
       message: "Something went wrong in server. Please contact the provider.",
     });
   }
