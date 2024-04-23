@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from "express";
 import morgan from "morgan";
 import taskRouter from "./src/routers/taskRouter.js";
@@ -21,5 +22,5 @@ app.use("/api/v1/tasks", taskRouter);
 //run the server
 
 app.listen(PORT, (error) => {
-  error ? console.log(error) : console.log(`Server running at http://localhost:${PORT}`);
+  error ? console.log(error) : console.log(`Server is running`);
 });
