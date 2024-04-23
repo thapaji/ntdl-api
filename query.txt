@@ -1,0 +1,38 @@
+insert single object
+db.users.insertOne({
+    name:'Sujan',
+    add:'Sydney',
+    number:'78979'
+})
+
+insert many object
+db.users.insertMany([{
+    name:'Sachin',
+    add:'hornsby',
+    number:'78979'
+},
+{
+    name:'Samikshya',
+    add:'Auburn',
+    number:'78979'
+},
+{
+    name:'Akriti',
+    add:'Sydney',
+    number:'78979'
+},
+{
+    name:'Prem',
+    add:'Sydney',
+    number:'78979'
+}])
+
+Read database
+db.users.find({name:'Sujan'})
+
+
+Update from database
+db.users.updateOne({name:'Sujan'},{$set:{add:'Campsie'}})
+
+Delete from database
+db.users.deleteOne({_id:ObjectId('661df4accb16f0cb602c1701')})
